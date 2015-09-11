@@ -1,9 +1,10 @@
 
 package Main;
 
-import game.GameObject;
-import input.Keyboard;
-import input.Mouse;
+import Main.game.GameObject;
+import Main.graphics.Shader;
+import Main.input.Keyboard;
+import Main.input.Mouse;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -12,7 +13,12 @@ import java.nio.ByteBuffer;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWvidmode;
+import static org.lwjgl.opengl.GL20.glUseProgram;
+import static org.lwjgl.opengl.GL30.*;
 import org.lwjgl.opengl.GLContext;
+import Main.utilities.Utilities;
+import Main.utilities.Vector3f;
+import static org.lwjgl.opengl.GL13.*;
 /**
  *
  * @author Daniel Viktor Isaac
@@ -53,12 +59,14 @@ public class Main {
         ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         
         glfwMakeContextCurrent(window);
-        glfwShowWindow(window);
-        
+        glfwShowWindow(window);        
         GLContext.createFromCurrent();
         
         glClearColor(1.0f, 0.4f, 1.0f, 1.0f);
-        //glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);
+        glActiveTexture(GL_TEXTURE1);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         System.out.println(glGetString(GL_VERSION));
         kamu = new GameObject(1);
         
@@ -71,12 +79,20 @@ public class Main {
     public void update(){
         glfwPollEvents();
         checkInput();
-        kamu.draw();
+       // kamu.draw();
         
     }
     
     public void run(){
         init();
+        
+        int vao = glGenVertexArrays();
+        glBindVertexArray(vao);
+        
+        Shader shader = new Shader("src/main/java/Main/shaders/shader.vert", "src/main/java/Main/shaders/shader.vert");
+        shader.enable();
+        shader.setUniform3f("col", new Vector3f(0.8f, 0.8f, 0.2f));
+        
         //restricting the framerate to 60
         long lastTime = System.nanoTime();
         double delta = 0.0;
