@@ -29,7 +29,7 @@ public class VertexArrayObject {
     
     //Will handle all the vertex object creations
     public void createArrayObject(float[] vertices, byte[] indices, float[] textureCoordinates){
-        int vaoID = glGenVertexArrays();
+        vaoID = glGenVertexArrays();
         glBindVertexArray(vaoID);
         createVerticesBuffer(vertices);
         createindicesBuffer(indices);
@@ -71,7 +71,7 @@ public class VertexArrayObject {
     }
     
     public void bind(){
-        
+        glBindVertexArray(vaoID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboID);
     }
     public void unbind(){

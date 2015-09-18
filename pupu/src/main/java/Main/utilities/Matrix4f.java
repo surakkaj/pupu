@@ -6,6 +6,7 @@
 package Main.utilities;
 
 import static java.lang.Math.*;
+import java.nio.FloatBuffer;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Matrix4f {
             return result;
         }
         
-        public Matrix4f translate(Vector3f vector){
+        public static Matrix4f translate(Vector3f vector){
             Matrix4f result = identity();
             
             result.matrix[0 + 3 * 4] = vector.x;
@@ -88,6 +89,10 @@ public class Matrix4f {
             result.matrix[2 + 3 * 4] = (near + far) / (far - near);
             
             return result;
+        }
+        
+        public FloatBuffer toFloatBuffer(){
+            return Utilities.createFloatBuffer(matrix);
         }
         
 }

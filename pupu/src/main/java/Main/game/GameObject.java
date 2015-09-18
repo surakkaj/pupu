@@ -5,7 +5,10 @@
  */
 package Main.game;
 
+import Main.graphics.Shader;
+import Main.graphics.Texture;
 import Main.graphics.VertexArrayObject;
+import Main.utilities.Matrix4f;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -15,48 +18,130 @@ import Main.utilities.Vector3f;
  *
  * @author Daniel Viktor Isaac
  */
-public class GameObject {
+public abstract class GameObject {
 
-    public int vaoID;
+    // public int vaoID;
     public int count;
-    public float SIZE = 1.0f;
-    
-    private VertexArrayObject mesh;
+    public float SIZE = 0f;
+
+    private VertexArrayObject vao;
+    private Texture tex;
     private Vector3f position = new Vector3f();
-    private float rot;
+    private float rot = 0;
     private float delta = 0.0f;
 
-    public float[] vertices = {
-        -SIZE / 2.0f, -SIZE / 2.0f, 0f,
-        -SIZE / 2.0f, SIZE / 2.0f, 0f,
-        SIZE / 2.0f, SIZE / 2.0f, 0f,
-        SIZE / 2.0f, -SIZE / 2.0f, 0f,
-    };
+    public float[] vertices, tcs;
+    public byte[] indices;
 
-    public float[] tcs = new float[]{
-        0, 1,
-        0, 0,
-        1, 0,
-        1, 1
-    };
+    public GameObject() {
+        if (SIZE == 0) {
 
-    public byte[] indices = new byte[]{
-        0, 1, 2, 2, 3, 0
-    };
+            this.SIZE = 1.0f;
+        }
+        vertices = new float[]{
+            -SIZE / 2.0f, -SIZE / 2.0f, 0f,
+            -SIZE / 2.0f, SIZE / 2.0f, 0f,
+            SIZE / 2.0f, SIZE / 2.0f, 0f,
+            SIZE / 2.0f, -SIZE / 2.0f, 0f,};
 
-    private VertexArrayObject texture;
+        tcs = new float[]{
+            0, 1,
+            0, 0,
+            1, 0,
+            1, 1
+        };
 
-    public GameObject(int vaoID) {
-        this.vaoID = vaoID;
+        indices = new byte[]{
+            0, 1, 2, 2, 3, 0
+        };
+        tex = new Texture("etc/ruusu.PNG");
+        Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
+        Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
+        Shader.SHADER.setUniform1i("tex", 1);
+        //this.vaoID = vaoID;
         this.count = indices.length;
-        texture = new VertexArrayObject(this.vertices, this.indices, this.tcs);
+        vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
+
+    }
+        public GameObject(float size) {
+        this.SIZE = size;
+        vertices = new float[]{
+            -SIZE / 2.0f, -SIZE / 2.0f, 0f,
+            -SIZE / 2.0f, SIZE / 2.0f, 0f,
+            SIZE / 2.0f, SIZE / 2.0f, 0f,
+            SIZE / 2.0f, -SIZE / 2.0f, 0f,};
+
+        tcs = new float[]{
+            0, 1,
+            0, 0,
+            1, 0,
+            1, 1
+        };
+
+        indices = new byte[]{
+            0, 1, 2, 2, 3, 0
+        };
+        tex = new Texture("etc/ruusu.PNG");
+        Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
+        Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
+        Shader.SHADER.setUniform1i("tex", 1);
+        //this.vaoID = vaoID;
+        this.count = indices.length;
+        vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
+
     }
 
+    public abstract void update();
+
     public void draw() {
-        glBindVertexArray(this.vaoID);
-        glEnableVertexAttribArray(0);
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_BYTE, 0);
-        glDisableVertexAttribArray(0);
-        glBindVertexArray(0);
+
+        Shader.SHADER.enable();
+        Shader.SHADER.setUniformMat4f("ml_matrix", Matrix4f.translate(position).multiply(Matrix4f.rotate(rot)));
+        tex.bind();
+        vao.render();
+        Shader.SHADER.disable();
+
+    }
+    
+    public void addToRot(float a){
+        rot+=a;
+    }
+
+    public void addToX(float a) {
+        position.x += a;
+    }
+
+    public void addToY(float a) {
+        position.y += a;
+    }
+
+    public void addToZ(float a) {
+        position.z += a;
+    }
+
+    public void setX(float a) {
+        position.x = a;
+    }
+
+    public void setY(float a) {
+        position.y = a;
+    }
+
+    public void setZ(float a) {
+        position.z = a;
+    }
+
+    public Vector3f getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(Vector3f pos) {
+        this.position.x = pos.x;
+        this.position.y = pos.y;
+        this.position.z = pos.z;
+    }
+
+    public void setSize(float size) {
+        this.SIZE = size;
     }
 }

@@ -2,9 +2,12 @@
 package Main;
 
 import Main.game.GameObject;
+import Main.game.Level;
+import Main.game.Pupu;
 import Main.graphics.Shader;
 import Main.input.Keyboard;
 import Main.input.Mouse;
+import Main.utilities.Matrix4f;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -28,7 +31,7 @@ public class Main {
     
     public boolean running = false;
     public long window;
-    public int width = 1200, height = 800;
+    public int width = 1280, height = 720;
     //Mouse is used to get callbacks for the x and y coordinates from native mouse
     public Mouse mouse;
     
@@ -36,8 +39,8 @@ public class Main {
     private GLFWKeyCallback keyCallback;
     private GLFWCursorPosCallback cursorPosCallback;
     
-    GameObject kamu;
-    
+    Pupu kamu;
+    public Level level;
     
     
     public void init(){
@@ -62,24 +65,32 @@ public class Main {
         glfwShowWindow(window);        
         GLContext.createFromCurrent();
         
-        glClearColor(1.0f, 0.4f, 1.0f, 1.0f);
+       // glClearColor(1.0f, 0.4f, 1.0f, 0.5f);
         glEnable(GL_DEPTH_TEST);
         glActiveTexture(GL_TEXTURE1);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         System.out.println(glGetString(GL_VERSION));
-        kamu = new GameObject(1);
+        Shader.loadAll();
+        
+        
+        level = new Level();
         
     }
     
     public void render(){
+        
+        
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        level.render();
         glfwSwapBuffers(window);
+        
     }
     
     public void update(){
         glfwPollEvents();
+        level.update();
         checkInput();
-       // kamu.draw();
         
     }
     
@@ -89,11 +100,7 @@ public class Main {
         int vao = glGenVertexArrays();
         glBindVertexArray(vao);
         
-        Shader shader = new Shader("src/main/java/Main/shaders/shader.vert", "src/main/java/Main/shaders/shader.vert");
-        shader.enable();
-        shader.setUniform3f("col", new Vector3f(0.8f, 0.8f, 0.2f));
-        
-        //restricting the framerate to 60
+
         long lastTime = System.nanoTime();
         double delta = 0.0;
         double ns = 1000000000.0 / 60.0;
@@ -140,16 +147,17 @@ public class Main {
         if (!Keyboard.isKeyDown(GLFW_KEY_SPACE)){
             isKeyReturned[GLFW_KEY_SPACE] = true;
         }
-        if (Keyboard.isKeyDown(GLFW_KEY_A)) {
-            System.out.println("A pressed");
-        }
+        
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == 1 && isKeyReturned[GLFW_MOUSE_BUTTON_1]) {
             System.out.println("x: " + mouse.returnX() + "\ny: " + mouse.returnY());
+            level.pull(mouse.returnX(),mouse.returnY());
             isKeyReturned[GLFW_MOUSE_BUTTON_1] = false;
         }
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == 0){
             isKeyReturned[GLFW_MOUSE_BUTTON_1] = true;
         }
+        
+        level.checkInput();
         /*
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == 1) {
             System.out.println("x: " + mouse.returnX() + "\ny: " + mouse.returnY());
@@ -163,6 +171,9 @@ public class Main {
         Main driver = new Main();
         driver.run();
         
+    }
+    public void stop(){
+        this.running = false;
     }
     
 }

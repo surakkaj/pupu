@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
  */
 
 
-/* As of 11.9, test cannot be written due to the lack of game logic involved. */
 public class MainTest {
     
     public MainTest() {

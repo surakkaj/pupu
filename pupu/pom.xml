@@ -83,6 +83,15 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                    <argLine>-Djava.library.path=target/natives/</argLine>
+                </configuration>
+            </plugin>
             <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -107,6 +116,13 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
+                <configuration>
+                    <instrumentation>
+                        <includes>
+                            <include>Main/**/*.class</include>
+                        </includes>
+                    </instrumentation>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -114,10 +130,10 @@
                 <version>1.1.4</version>
                 <configuration>
                     <targetClasses>
-                        <param>death.pupu.pupu.*</param>
+                        <param>Main.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>death.pupu.pupu.*</param>
+                        <param>Main*.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
