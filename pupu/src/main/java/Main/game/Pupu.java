@@ -6,7 +6,7 @@
 package Main.game;
 
 /**
- *
+ * Pupu is the main character of the game.
  * @author Daniel Viktor Isaac
  */
 public class Pupu extends GameObject {
@@ -15,13 +15,13 @@ public class Pupu extends GameObject {
     private int carrots;
 
     public Pupu() {
-        super();
+        super("etc/ruusu.PNG");
         this.gun = new Gun();
 
     }
 
     public void pull() {
-        this.gun.pull(this.getPosition());
+        this.gun.shoot(this.getPosition());
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Pupu extends GameObject {
         this.gun.update(this.getPosition());
     }
 
-    void pull(double mouseX, double mouseY) {
-        this.gun.pull(this.getPosition(), mouseX, mouseY);
+    public void shoot(double mouseX, double mouseY) {
+        this.gun.shoot(this.getPosition(), mouseX, mouseY);
     }
 
 }

@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL11.*;
 import Main.utilities.Utilities;
 
 /**
- *
+ * This class is used to read, and get info from textures.
  * @author Daniel Viktor Isaac
  */
 public class Texture {
@@ -24,7 +24,11 @@ public class Texture {
     public Texture(String path) {
         texture = load(path);
     }
-
+    /**
+     * This method is used to translate a picture format into a format opengl can understand
+     * @param path is the file path the texture is located
+     * @return the texture that has been formatted so opengl can understand it
+     */
     private int load(String path) {
         int[] pixels = null;
 

@@ -9,7 +9,8 @@ import static java.lang.Math.*;
 import java.nio.FloatBuffer;
 
 /**
- *
+ *This class is used for matrix calculations, that shaders use.
+ * 
  * @author Daniel Viktor Isaac
  */
 public class Matrix4f {
@@ -24,6 +25,11 @@ public class Matrix4f {
         0010
         0001        
         */
+        /**
+         * This method is used to create a new matrix, with diagonal ones.
+         * 
+         * @return result matrix with ones at 1.1, 2.2, 3.3, 4.4 
+         */
         public static Matrix4f identity(){
             Matrix4f result = new Matrix4f();
             for(int i = 0; i < SIZE; i++) {
@@ -37,7 +43,13 @@ public class Matrix4f {
             
             return result;
         }
-        
+        /**
+         * This method does a matrix multiplication with two matrixes
+         * 
+         * @param matrix used for the other matrix
+         * 
+         * @return the multiplied matrix of this.matrix, and the matrix given in the arguments
+         */
         public Matrix4f multiply(Matrix4f matrix){
             Matrix4f result = new Matrix4f();
             float sum;
@@ -52,7 +64,11 @@ public class Matrix4f {
             }
             return result;
         }
-        
+        /**
+         * This reads coordinates, and translates them into the correct integer array positions.
+         * @param vector that has the coordinates
+         * @return result is  this.matrix, but with new coordiantes.
+         */
         public static Matrix4f translate(Vector3f vector){
             Matrix4f result = identity();
             
@@ -62,6 +78,11 @@ public class Matrix4f {
             return result;
         }
         
+        /**
+         * this method calculates  angles and puts them in the matrix, so any object can be rotated
+         * @param angle the angle that the object is rotated. 
+         * @return result is this.matrix, with new rotation coordinates.
+         */
         //calculates the radians of the given angle, and inputs them to the matrix
         public static Matrix4f rotate(float angle){
             Matrix4f result = identity();
@@ -77,6 +98,17 @@ public class Matrix4f {
             return result;
         }
         
+        /**
+         * This method formats the matrix, so opengl knows to project it  in an ortographic view.
+         * 
+         * @param left the left boundaries, where the object can be rendered
+         * @param right the right boundaries, where the object can be rendered
+         * @param bottom the bottom boundaries, where the object can be rendered
+         * @param top the top boundaries, where the object can be rendered
+         * @param near the near boundaries, where the object can be rendered
+         * @param far the far boundaries, where the object can be rendered
+         * @return result is the new matrix calculated with the inputs
+         */
         public static Matrix4f ortographic(float left,float right,float bottom ,float top ,float near ,float far){
             Matrix4f result = identity();
             

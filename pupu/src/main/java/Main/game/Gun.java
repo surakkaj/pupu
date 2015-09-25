@@ -7,30 +7,31 @@ package Main.game;
 
 import Main.utilities.Vector3f;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
- *
+ * The class that is the gun that casts bullets to the game. It sits on villains and Pupu.l
  * @author Daniel Viktor Isaac
  */
 public class Gun extends GameObject {
 
-    private ArrayList<Bullet> bullets;
+    private LinkedList<Bullet> bullets;
 
     public Gun() {
-        super(0.5f);
-        this.bullets = new ArrayList<Bullet>();
+        super(0.5f, "etc/ruusu.PNG");
+        this.bullets = new LinkedList<Bullet>();
 
         System.out.println(this.getPosition().z);
 
     }
 
-    public void pull(Vector3f pos) {
+    public void shoot(Vector3f pos) {
         this.bullets.add(new Bullet(pos));
     }
-    public void pull(Vector3f pos, double mouseX, double mouseY) {
+    public void shoot(Vector3f pos, double targetX, double targetY) {
         
-        this.bullets.add(new Bullet(pos, mouseX, mouseY)); 
+        this.bullets.add(new Bullet(pos, targetX, targetY)); 
     }
 
     public void update(Vector3f position) {
@@ -53,7 +54,7 @@ public class Gun extends GameObject {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public ArrayList<Bullet> getBullets() {
+    public LinkedList<Bullet> getBullets() {
         return this.bullets;
     }
 

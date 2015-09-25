@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL30.*;
 import static Main.utilities.Utilities.*;
 
 /**
- *
+ * This class creates the vertex array objects neccessary for rendering images.
  * @author Daniel Viktor Isaac
  */
 public class VertexArrayObject {

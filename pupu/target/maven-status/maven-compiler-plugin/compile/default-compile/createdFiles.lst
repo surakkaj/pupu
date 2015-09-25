@@ -1,6 +1,7 @@
 Main\utilities\Utilities.class
 Main\game\Pupu.class
 Main\game\Level.class
+Main\game\Villain.class
 Main\graphics\VertexArrayObject.class
 Main\utilities\Matrix4f.class
 Main\graphics\Texture.class

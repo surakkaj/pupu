@@ -1,4 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: PupuTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.473 sec - in PupuTest
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 116.77 sec <<< FAILURE! - in PupuTest
+PupuCanShootTest(PupuTest)  Time elapsed: 0.011 sec  <<< FAILURE!
+java.lang.AssertionError: null
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertTrue(Assert.java:52)
+	at PupuTest.PupuCanShootTest(PupuTest.java:73)
+

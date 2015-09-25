@@ -68,8 +68,8 @@ public class PupuTest {
 
     @Test
     public void PupuCanShootTest() {
-        this.main.level.kamu.gun.pull(this.main.level.kamu.getPosition());
-        this.main.level.kamu.gun.pull(this.main.level.kamu.getPosition());
+        this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
+        this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
         assertTrue(this.main.level.kamu.gun.getBullets().size()==2);
     }
 

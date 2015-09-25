@@ -8,7 +8,7 @@ package Main.input;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 /**
- *
+ * Mouse class, used to get the coordinates of the mouse on the window.
  * @author Daniel Viktor Isaac
  */
 public class Mouse extends GLFWCursorPosCallback {

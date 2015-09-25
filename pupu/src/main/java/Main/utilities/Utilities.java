@@ -17,7 +17,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 
 /**
- *
+ *This class is for methods, that are vital to the graphic engine
  * @author Daniel Viktor Isaac
  */
 public class Utilities {

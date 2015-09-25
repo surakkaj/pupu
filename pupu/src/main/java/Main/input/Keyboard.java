@@ -9,7 +9,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 /**
- *
+ * This class is used to get input from the keyboard.
  * @author Daniel Viktor Isaac
  */
 public class Keyboard extends GLFWKeyCallback {

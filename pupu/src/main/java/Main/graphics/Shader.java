@@ -11,7 +11,7 @@ import Main.utilities.Utilities;
 import Main.utilities.Vector3f;
 
 /**
- *
+ * Class used to load the specific shaders. 
  * @author Daniel Viktor Isaac
  */
 public class Shader {

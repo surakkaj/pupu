@@ -15,6 +15,7 @@ import static org.lwjgl.opengl.GL30.*;
 import Main.utilities.Vector3f;
 
 /**
+ * This class is the abstract basis of all gameobjects to clean up the code
  *
  * @author Daniel Viktor Isaac
  */
@@ -33,7 +34,7 @@ public abstract class GameObject {
     public float[] vertices, tcs;
     public byte[] indices;
 
-    public GameObject() {
+    public GameObject(String texturePath) {
         if (SIZE == 0) {
 
             this.SIZE = 1.0f;
@@ -54,7 +55,7 @@ public abstract class GameObject {
         indices = new byte[]{
             0, 1, 2, 2, 3, 0
         };
-        tex = new Texture("etc/ruusu.PNG");
+        tex = new Texture(texturePath);
         Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
         Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
         Shader.SHADER.setUniform1i("tex", 1);
@@ -63,7 +64,13 @@ public abstract class GameObject {
         vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
 
     }
-        public GameObject(float size) {
+
+    /**
+     *
+     * @param size the size of the object
+     * @param texturePath the texturepath where the objects texture locates
+     */
+    public GameObject(float size, String texturePath) {
         this.SIZE = size;
         vertices = new float[]{
             -SIZE / 2.0f, -SIZE / 2.0f, 0f,
@@ -81,7 +88,7 @@ public abstract class GameObject {
         indices = new byte[]{
             0, 1, 2, 2, 3, 0
         };
-        tex = new Texture("etc/ruusu.PNG");
+        tex = new Texture(texturePath);
         Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
         Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
         Shader.SHADER.setUniform1i("tex", 1);
@@ -102,9 +109,9 @@ public abstract class GameObject {
         Shader.SHADER.disable();
 
     }
-    
-    public void addToRot(float a){
-        rot+=a;
+
+    public void addToRot(float a) {
+        rot += a;
     }
 
     public void addToX(float a) {
