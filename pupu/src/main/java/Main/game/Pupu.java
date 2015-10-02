@@ -35,10 +35,14 @@ public class Pupu extends GameObject {
     public void update() {
 
         this.gun.update(this.getPosition());
+        System.out.println("Carrots : " + carrots);
     }
 
     public void shoot(double mouseX, double mouseY) {
         this.gun.shoot(this.getPosition(), mouseX, mouseY);
+    }
+    public void addCarrots(int x){
+        this.carrots += x;
     }
 
 }

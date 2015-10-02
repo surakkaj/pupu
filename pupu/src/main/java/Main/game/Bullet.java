@@ -34,9 +34,12 @@ public class Bullet extends GameObject {
 
         targetX = (targetX / 100) - 6.4; //need replacement if camera moves
         targetY = (targetY / 100) - 3.6;
+        targetX *= 16/9;
+        targetY = -targetY;
+        targetY *= 1.5;
         this.setPosition(pos);
-        System.out.println("mouse:" + targetX + " Pos:" + pos.x);
-        System.out.println("mouse:" + targetY + " Pos:" + pos.y);
+        //System.out.println("mousex:" + targetX + " Posx:" + pos.x);
+        System.out.println("mousey:" + targetY + " Posy:" + pos.y);
         dx = ((float) targetX) - (pos.x * 9f / 16f);
         dy = ((float) targetY) - (pos.y / 1.0f);
         h = (float) Math.pow(dx, 2) + (float) Math.pow(dy, 2);
@@ -48,7 +51,7 @@ public class Bullet extends GameObject {
     public void update() {
         //System.out.println(this.getPosition().toString());
         this.addToX(dx / h / 10);
-        this.addToY(-dy / h / 10);
+        this.addToY(dy / h / 10);
     }
 
 }

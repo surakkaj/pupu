@@ -25,6 +25,7 @@ public class Level {
     private Villain vihu;
     private int villainTimer;
     private LinkedList<Villain> villainList;
+    private LinkedList<GameObject> carrotList;
     private Random random;
 
     public Level() {
@@ -32,6 +33,7 @@ public class Level {
         this.vihu = new Villain(0.2f, "etc/bradimir.PNG", new Vector3f(0.4f, 0.4f, 1f));
         this.villainTimer = 0;
         this.villainList = new LinkedList<Villain>();
+        this.carrotList = new LinkedList<GameObject>();
         this.random = new Random();
     }
 
@@ -41,6 +43,9 @@ public class Level {
         for (int i = 0; i < this.villainList.size(); i++) {
             this.villainList.get(i).draw();
         }
+        for (int i = 0; i < this.carrotList.size(); i++) {
+            this.carrotList.get(i).draw();
+        }
     }
 
     public void update() {
@@ -49,11 +54,15 @@ public class Level {
         for (int i = 0; i < this.villainList.size(); i++) {
             this.villainList.get(i).update(kamu.getPosition());
         }
+        for (int i = 0; i < this.carrotList.size(); i++) {
+            this.carrotList.get(i).update();
+        }
+        //spawns villains every 1.5s
         if (villainTimer > 90) {
-            float x = 5 * random.nextFloat() + kamu.getPosition().x; // only spawns to right up
-            float y = 5 * random.nextFloat() + kamu.getPosition().y;
+            float x = 5 * random.nextFloat() + kamu.getPosition().x - 2.5f; // only spawns to right up
+            float y = 5 * random.nextFloat() + kamu.getPosition().y - 2.5f;
             float z = 5 * random.nextFloat() + kamu.getPosition().z;
-            this.villainList.add(new Villain(0.2f, "etc/bradimir.PNG", new Vector3f(x, y, 1f)));
+            this.villainList.add(new Villain(0.2f, "etc/bradimir.PNG", new Vector3f(x, y, 2f)));
             villainTimer = 0;
         }
         villainTimer++;
@@ -91,8 +100,31 @@ public class Level {
      * used to check the bullet collisions by bullets from villains or pupu.
      */
     void collisionDetection() {
+        for (int i = 0; i < carrotList.size(); i++) {
+            if (carrotList.get(i).getPosition().x - kamu.getPosition().x < .5f
+                    && carrotList.get(i).getPosition().x - kamu.getPosition().x > -.5f) {
+                if (carrotList.get(i).getPosition().y - kamu.getPosition().y < .5f
+                        && carrotList.get(i).getPosition().y - kamu.getPosition().y > -.5f) {
+                    this.carrotList.remove(i);
+                    i--;
+                    kamu.addCarrots(1);
+
+                }
+            }
+        }
         for (int i = 0; i < villainList.size(); i++) {
-            
+            for (int j = 0; j < villainList.get(i).gun.getBullets().size(); j++) {
+                if (villainList.get(i).gun.getBullets().get(j).getPosition().x - kamu.getPosition().x < .4f
+                        && villainList.get(i).gun.getBullets().get(j).getPosition().x - kamu.getPosition().x > -.4f) {
+
+                    if (villainList.get(i).gun.getBullets().get(j).getPosition().y - kamu.getPosition().y < .4f
+                            && villainList.get(i).gun.getBullets().get(j).getPosition().y - kamu.getPosition().y > -.4f) {
+                        kamu.addCarrots(-1);
+                        villainList.get(i).getBullets().remove(j);
+                        j--;
+                    }
+                }
+            }
 
             for (int j = 0; j < kamu.gun.getBullets().size(); j++) {
                 if (villainList.size() == 0) {
@@ -101,10 +133,16 @@ public class Level {
                 if (kamu.gun.getBullets().size() == 0) {
                     return;
                 }
-                if (j < 0 || i < 0 || j >= kamu.gun.getBullets().size() || i >= villainList.size() ) {
+                if (j < 0 || i < 0) {
                     return;
                 }
-                
+                if (j >= kamu.gun.getBullets().size()) {
+                    j--;
+                }
+                if (i >= villainList.size()) {
+                    i--;
+                }
+
                 if (kamu.gun.getBullets().get(j).getPosition().x - villainList.get(i).getPosition().x < .4f
                         && kamu.gun.getBullets().get(j).getPosition().x - villainList.get(i).getPosition().x > -.4f) {
 
@@ -112,6 +150,7 @@ public class Level {
                             && kamu.gun.getBullets().get(j).getPosition().y - villainList.get(i).getPosition().y > -.4f) {
                         System.out.println("hit");
                         kamu.gun.getBullets().remove(j);
+                        this.carrotList.add(new Carrot(villainList.get(i).getPosition()));
                         villainList.remove(i);
                         i--;
                         j--;
@@ -119,8 +158,9 @@ public class Level {
                     }
 
                 }
-                
+
             }
         }
     }
+
 }

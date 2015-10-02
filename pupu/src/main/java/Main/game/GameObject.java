@@ -64,6 +64,8 @@ public abstract class GameObject {
         vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
 
     }
+    
+    
 
     /**
      *
