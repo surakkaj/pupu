@@ -24,7 +24,7 @@ public class Gun extends GameObject {
  * a game object with a virtual bandolier and power
  */
     public Gun() {
-        super(0.5f, "etc/ruusu.PNG");
+        super(0.5f, "etc/bullet.png");
         this.bullets = new LinkedList<Bullet>();
         this.power = 1;
         System.out.println(this.getPosition().z);

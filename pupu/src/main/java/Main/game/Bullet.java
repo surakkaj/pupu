@@ -21,7 +21,7 @@ public class Bullet extends GameObject {
 
     public Bullet(Vector3f pos) {
 
-        super(0.2f, "etc/ruusu.PNG");
+        super(0.2f, "etc/bullet.png");
         this.setPosition(pos);
         this.destructionTimer = 0;
     }
@@ -32,7 +32,7 @@ public class Bullet extends GameObject {
  * @param targetY the y location of the bullets target
  */
     public Bullet(Vector3f pos, double targetX, double targetY) {
-        super(0.2f, "etc/ruusu.PNG");
+        super(0.2f, "etc/bullet.png");
 
         targetX = (targetX / 100) - 6.4; //need replacement if camera moves
         targetY = (targetY / 100) - 3.6;
@@ -55,6 +55,18 @@ public class Bullet extends GameObject {
         //System.out.println(this.getPosition().toString());
         this.addToX(dx / h / 10);
         this.addToY(dy / h / 10);
+        if (this.getPosition().x <- 10f) {
+            dx*=-1;
+        }
+        if (this.getPosition().x > 10f) {
+            dx*=-1;
+        }
+        if (this.getPosition().y < -5.5f) {
+            dy*=-1;
+        }
+        if (this.getPosition().y > 5.5f) {
+            dy*=-1;
+        }
         this.destructionTimer++;
     }
     
