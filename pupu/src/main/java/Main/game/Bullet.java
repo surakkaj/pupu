@@ -17,11 +17,13 @@ import java.lang.Math.*;
 public class Bullet extends GameObject {
 
     private float dx, dy, h;
+    private int destructionTimer;
 
     public Bullet(Vector3f pos) {
 
         super(0.2f, "etc/ruusu.PNG");
         this.setPosition(pos);
+        this.destructionTimer = 0;
     }
 /**
  * 
@@ -44,6 +46,7 @@ public class Bullet extends GameObject {
         dy = ((float) targetY) - (pos.y / 1.0f);
         h = (float) Math.pow(dx, 2) + (float) Math.pow(dy, 2);
         h = (float) Math.sqrt(h);
+        this.destructionTimer = 0;
 
     }
 
@@ -52,6 +55,14 @@ public class Bullet extends GameObject {
         //System.out.println(this.getPosition().toString());
         this.addToX(dx / h / 10);
         this.addToY(dy / h / 10);
+        this.destructionTimer++;
+    }
+    
+    public boolean shouldDestroy(){
+        if (this.destructionTimer > 1000) {
+            return true;
+        }
+        return false;
     }
 
 }

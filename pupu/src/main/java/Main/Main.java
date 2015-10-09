@@ -90,9 +90,10 @@ public class Main {
         checkInput();
 
     }
-/**
- * main game loop
- */
+
+    /**
+     * main game loop
+     */
     public void run() {
         init();
 
@@ -134,7 +135,8 @@ public class Main {
     }
 
     /**
-     * The method used to check all inputs that relate to the main class. Also contains Level.checkInput();
+     * The method used to check all inputs that relate to the main class. Also
+     * contains Level.checkInput();
      */
     public void checkInput() {
 
@@ -153,6 +155,13 @@ public class Main {
         }
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == 0) {
             isKeyReturned[GLFW_MOUSE_BUTTON_1] = true;
+        }
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == 1 && isKeyReturned[GLFW_MOUSE_BUTTON_2]) {
+            level.kamu.slide((float)mouse.returnX(), (float)mouse.returnY());
+            isKeyReturned[GLFW_MOUSE_BUTTON_2] = false;
+        }
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == 0) {
+            isKeyReturned[GLFW_MOUSE_BUTTON_2] = true;
         }
 
         level.checkInput();

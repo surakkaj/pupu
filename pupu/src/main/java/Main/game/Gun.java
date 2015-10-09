@@ -11,17 +11,22 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 /**
- * The class that is the gun that casts bullets to the game. It sits on villains and Pupu.l
+ * The class that is the gun that casts bullets to the game. It sits on villains
+ * and Pupu.l
+ *
  * @author Daniel Viktor Isaac
  */
 public class Gun extends GameObject {
 
     private LinkedList<Bullet> bullets;
-
+    private int power;
+/**
+ * a game object with a virtual bandolier and power
+ */
     public Gun() {
         super(0.5f, "etc/ruusu.PNG");
         this.bullets = new LinkedList<Bullet>();
-
+        this.power = 1;
         System.out.println(this.getPosition().z);
 
     }
@@ -29,9 +34,10 @@ public class Gun extends GameObject {
     public void shoot(Vector3f pos) {
         this.bullets.add(new Bullet(pos));
     }
+
     public void shoot(Vector3f pos, double targetX, double targetY) {
-        
-        this.bullets.add(new Bullet(pos, targetX, targetY)); 
+
+        this.bullets.add(new Bullet(pos, targetX, targetY));
     }
 
     public void update(Vector3f position) {
@@ -58,6 +64,8 @@ public class Gun extends GameObject {
         return this.bullets;
     }
 
-    
+    public void upgrade(int a) {
+        this.power += a;
+    }
 
 }

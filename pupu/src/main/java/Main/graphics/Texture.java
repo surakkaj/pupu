@@ -42,7 +42,7 @@ public class Texture {
             
         } catch (IOException ex) {
             Logger.getLogger(Texture.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("muna");
+            System.out.println("Problem with loading the graphics " + path);
         }
 
         int[] data = new int[width * height];
@@ -69,6 +69,8 @@ public class Texture {
     public int getWidth() {
         return width;
     }
+    
+
 
     public int getHeight() {
         return height;

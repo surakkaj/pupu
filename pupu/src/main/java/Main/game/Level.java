@@ -114,6 +114,15 @@ public class Level {
         }
         for (int i = 0; i < villainList.size(); i++) {
             for (int j = 0; j < villainList.get(i).gun.getBullets().size(); j++) {
+
+                if (villainList.get(i).gun.getBullets().get(j).shouldDestroy()) {
+                    villainList.get(i).gun.getBullets().remove(j);
+                    j--;
+                }
+                if (j < 0) {
+                    return;
+                }
+
                 if (villainList.get(i).gun.getBullets().get(j).getPosition().x - kamu.getPosition().x < .4f
                         && villainList.get(i).gun.getBullets().get(j).getPosition().x - kamu.getPosition().x > -.4f) {
 
@@ -127,6 +136,10 @@ public class Level {
             }
 
             for (int j = 0; j < kamu.gun.getBullets().size(); j++) {
+                if (kamu.gun.getBullets().get(j).shouldDestroy()) {
+                    kamu.gun.getBullets().remove(j);
+                    j--;
+                }
                 if (villainList.size() == 0) {
                     return;
                 }

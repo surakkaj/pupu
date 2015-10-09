@@ -12,7 +12,10 @@ import Main.utilities.Vector3f;
  * @author Daniel Viktor Isaac
  */
 public class Carrot extends GameObject{
-
+/**
+ * 
+ * @param pos starting position
+ */
     public Carrot(Vector3f pos) {
         super(0.3f, "etc/carrot.png");
         this.setPosition(pos);
