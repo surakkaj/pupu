@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: PupuTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 11.249 sec <<< FAILURE! - in PupuTest
-PupuCanShootTest(PupuTest)  Time elapsed: 0.047 sec  <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 61.966 sec <<< FAILURE! - in PupuTest
+PupuCanShootTest(PupuTest)  Time elapsed: 0.044 sec  <<< FAILURE!
 java.lang.AssertionError: null
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
