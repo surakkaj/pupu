@@ -17,22 +17,24 @@ public class Villain extends GameObject {
 
     private int timer;
     public Gun gun;
-/**
- * 
- * @param size the sixe of the sprite
- * @param texturePath the location for the texture
- * @param position the startingposition of the villain
- */
+
+    /**
+     *
+     * @param size the sixe of the sprite
+     * @param texturePath the location for the texture
+     * @param position the startingposition of the villain
+     */
     public Villain(float size, String texturePath, Vector3f position) {
         super(size, texturePath);
         this.setPosition(position);
         this.gun = new Gun();
         timer = 0;
     }
-/**
- * 
- * @param pupu pupus location
- */
+
+    /**
+     *
+     * @param pupu pupus location
+     */
     public void update(Vector3f pupu) {
         this.gun.update(this.getPosition());
         if (timer > 60) {
@@ -64,7 +66,7 @@ public class Villain extends GameObject {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        update(this.getPosition());
     }
 
     public LinkedList<Bullet> getBullets() {

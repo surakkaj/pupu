@@ -70,7 +70,7 @@ public class PupuTest {
     public void PupuCanShootTest() {
         this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
         this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
-        assertTrue(this.main.level.kamu.gun.getBullets().size()==2);
+        assertTrue(this.main.level.kamu.gun.getBullets().size() == 2);
     }
 
     // TODO add test methods here.

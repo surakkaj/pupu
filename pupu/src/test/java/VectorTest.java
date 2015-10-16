@@ -17,39 +17,41 @@ import static org.junit.Assert.*;
  * @author Daniel Viktor Isaac
  */
 public class VectorTest {
+
     Vector3f vec;
+
     public VectorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         this.vec = new Vector3f();
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
-    public void canCreateVectorTest(){
+    public void canCreateVectorTest() {
         assertNotNull(vec);
     }
-    
+
     @Test
-    public void canManipulateVariablesTest(){
-        
+    public void canManipulateVariablesTest() {
+
         vec.x = .3f;
         vec.y = .3f;
-        assertTrue(vec.x==.3f);
-        assertTrue(vec.y==.3f);
+        assertTrue(vec.x == .3f);
+        assertTrue(vec.y == .3f);
     }
 
     // TODO add test methods here.

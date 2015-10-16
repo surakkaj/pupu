@@ -106,7 +106,9 @@ public class Main {
         long timer = System.currentTimeMillis();
         int updates = 0;
         int frames = 0;
-
+        /**
+         * @param running if running is set to false, the loop ends, and the program exits.
+         */
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -157,7 +159,7 @@ public class Main {
             isKeyReturned[GLFW_MOUSE_BUTTON_1] = true;
         }
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == 1 && isKeyReturned[GLFW_MOUSE_BUTTON_2]) {
-            level.kamu.slide((float)mouse.returnX(), (float)mouse.returnY());
+            level.kamu.slide((float) mouse.returnX(), (float) mouse.returnY());
             isKeyReturned[GLFW_MOUSE_BUTTON_2] = false;
         }
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == 0) {

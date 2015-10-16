@@ -20,9 +20,10 @@ public class Gun extends GameObject {
 
     private LinkedList<Bullet> bullets;
     private int power;
-/**
- * a game object with a virtual bandolier and power
- */
+
+    /**
+     * a game object with a virtual bandolier and power
+     */
     public Gun() {
         super(0.5f, "etc/bullet.png");
         this.bullets = new LinkedList<Bullet>();
@@ -57,7 +58,7 @@ public class Gun extends GameObject {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.update(this.getPosition());
     }
 
     public LinkedList<Bullet> getBullets() {

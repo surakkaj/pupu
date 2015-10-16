@@ -9,6 +9,7 @@ import Main.utilities.Vector3f;
 
 /**
  * Pupu is the main character of the game.
+ *
  * @author Daniel Viktor Isaac
  */
 public class Pupu extends GameObject {
@@ -25,8 +26,6 @@ public class Pupu extends GameObject {
     public void pull() {
         this.gun.shoot(this.getPosition());
     }
-    
-
 
     @Override
     public void draw() {
@@ -40,19 +39,19 @@ public class Pupu extends GameObject {
 
         this.gun.update(this.getPosition());
         System.out.println("Carrots : " + carrots);
-        
+
     }
 
     public void shoot(double mouseX, double mouseY) {
         this.gun.shoot(this.getPosition(), mouseX, mouseY);
     }
-    public void addCarrots(int x){
+
+    public void addCarrots(int x) {
         this.carrots += x;
     }
 
     public void slide(float targetX, float targetY) {
-       
+
     }
-    
 
 }

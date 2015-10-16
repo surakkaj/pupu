@@ -21,7 +21,6 @@ import Main.utilities.Vector3f;
  */
 public abstract class GameObject {
 
-    // public int vaoID;
     public int count;
     public float SIZE = 0f;
 
@@ -59,13 +58,11 @@ public abstract class GameObject {
         Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
         Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
         Shader.SHADER.setUniform1i("tex", 1);
-        //this.vaoID = vaoID;
+
         this.count = indices.length;
         vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
 
     }
-    
-    
 
     /**
      *
@@ -94,7 +91,7 @@ public abstract class GameObject {
         Matrix4f pr_matrix = Matrix4f.ortographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -16.0f, 16.0f);
         Shader.SHADER.setUniformMat4f("pr_matrix", pr_matrix);
         Shader.SHADER.setUniform1i("tex", 1);
-        //this.vaoID = vaoID;
+
         this.count = indices.length;
         vao = new VertexArrayObject(this.vertices, this.indices, this.tcs);
 

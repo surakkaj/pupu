@@ -24,7 +24,7 @@ public class Level {
     public Pupu kamu;
     private Villain vihu;
     private int villainTimer;
-    private LinkedList<Villain> villainList;
+    public LinkedList<Villain> villainList;
     private LinkedList<GameObject> carrotList;
     private Random random;
 
@@ -39,7 +39,6 @@ public class Level {
 
     public void render() {
         this.kamu.draw();
-        // this.vihu.draw();
         for (int i = 0; i < this.villainList.size(); i++) {
             this.villainList.get(i).draw();
         }
@@ -50,7 +49,6 @@ public class Level {
 
     public void update() {
         this.kamu.update();
-        //this.vihu.update(kamu.getPosition());
         for (int i = 0; i < this.villainList.size(); i++) {
             this.villainList.get(i).update(kamu.getPosition());
         }
