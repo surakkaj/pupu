@@ -25,7 +25,7 @@ public class Level {
     private Villain vihu;
     private int villainTimer;
     public LinkedList<Villain> villainList;
-    private LinkedList<GameObject> carrotList;
+    public LinkedList<GameObject> carrotList;
     private Random random;
 
     public Level() {
@@ -97,7 +97,7 @@ public class Level {
     /**
      * used to check the bullet collisions by bullets from villains or pupu.
      */
-    void collisionDetection() {
+    public void collisionDetection() {
         for (int i = 0; i < carrotList.size(); i++) {
             if (carrotList.get(i).getPosition().x - kamu.getPosition().x < .5f
                     && carrotList.get(i).getPosition().x - kamu.getPosition().x > -.5f) {

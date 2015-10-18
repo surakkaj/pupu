@@ -5,6 +5,7 @@
  */
 
 import Main.Main;
+import Main.game.Carrot;
 import Main.game.Villain;
 import Main.utilities.Vector3f;
 import org.junit.After;
@@ -52,22 +53,24 @@ public class LevelTest {
          assertTrue(this.main.level.villainList.size()!=0);
      }
      
-//     @Test
-//     public void CollisionTest(){
-//         for (int i = 0; i < 100; i++) {
-//             this.main.level.villainList.add(new Villain(0.2f, "etc/bradimir.PNG", (this.main.level.kamu.getPosition())));
-//             this.main.level.villainList.get(i).addToX(1f);
-//             
-//         }
-//         for (int i = 0; i < 10; i++) {
-//             this.main.level.kamu.shoot(this.main.level.villainList.get(this.main.level.villainList.size()-1).getPosition().x,
-//                     this.main.level.villainList.get(this.main.level.villainList.size()-1).getPosition().y);
-//             this.main.level.kamu.shoot(-1, -1);
-//         }
-//         assertTrue(this.main.level.kamu.getCarrots()!=0);
-//         
-//         
-//     }
+     @Test
+     public void CollisionTest(){
+         for (int i = 0; i < 100; i++) {
+             this.main.level.villainList.add(new Villain(0.2f, "etc/bradimir.PNG", (this.main.level.kamu.getPosition())));
+             this.main.level.villainList.get(i).addToX(1f);
+             
+         }
+         for (int i = 0; i < 10; i++) {
+             this.main.level.kamu.shoot(this.main.level.villainList.get(this.main.level.villainList.size()-1).getPosition().x,
+                     this.main.level.villainList.get(this.main.level.villainList.size()-1).getPosition().y);
+             this.main.level.kamu.shoot(-1, -1);
+             this.main.level.collisionDetection();
+             this.main.level.carrotList.add(new Carrot(this.main.level.kamu.getPosition()));
+         }
+         assertTrue(this.main.level.kamu.getCarrots()!=0);
+         
+         
+     }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
