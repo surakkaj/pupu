@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PupuTest" time="0.039" tests="5" errors="0" skipped="0" failures="0">
+<testsuite name="CarrotTest" time="0.022" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_25\jre\bin"/>
@@ -62,9 +62,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="PupuCanShootTest" classname="PupuTest" time="0.039"/>
-  <testcase name="PupuCanHaveCarrots" classname="PupuTest" time="0"/>
-  <testcase name="PupuCanCreateGunTest" classname="PupuTest" time="0"/>
-  <testcase name="PupuCanBeCreatedTest" classname="PupuTest" time="0"/>
-  <testcase name="PupuCanMoveTest" classname="PupuTest" time="0"/>
+  <testcase name="CarrotCanBeCreated" classname="CarrotTest" time="0.022"/>
 </testsuite>

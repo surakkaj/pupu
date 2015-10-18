@@ -57,9 +57,12 @@ public class PupuTest {
     public void PupuCanMoveTest() {
 
         this.main.level.kamu.addToX(.1f);
+        this.main.level.kamu.addToY(.1f);
         assertEquals(this.main.level.kamu.getPosition().x, .1f, .0f);
+        assertEquals(this.main.level.kamu.getPosition().y, .1f, .0f);
 
     }
+    
 
     @Test
     public void PupuCanCreateGunTest() {
@@ -71,6 +74,11 @@ public class PupuTest {
         this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
         this.main.level.kamu.gun.shoot(this.main.level.kamu.getPosition());
         assertTrue(this.main.level.kamu.gun.getBullets().size() == 2);
+    }
+    @Test
+    public void PupuCanHaveCarrots(){
+        this.main.level.kamu.addCarrots(1);
+        assertEquals(this.main.level.kamu.getCarrots(), 1);
     }
 
     // TODO add test methods here.

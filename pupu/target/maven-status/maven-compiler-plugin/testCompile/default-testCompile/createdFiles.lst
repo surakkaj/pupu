@@ -1,4 +1,8 @@
 PupuTest.class
 MainTest.class
-VillainTest.class
+LevelTest.class
+CarrotTest.class
 VectorTest.class
+BulletTest.class
+VillainTest.class
+InputTest.class

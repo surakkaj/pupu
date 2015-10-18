@@ -49,6 +49,10 @@ public class Pupu extends GameObject {
     public void addCarrots(int x) {
         this.carrots += x;
     }
+    
+    public int getCarrots(){
+        return this.carrots;
+    }
 
     public void slide(float targetX, float targetY) {
 

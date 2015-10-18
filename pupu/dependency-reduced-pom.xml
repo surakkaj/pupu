@@ -86,7 +86,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>Main.Main.java</mainClass>
+                  <mainClass>Main.Main</mainClass>
                 </transformer>
               </transformers>
             </configuration>
